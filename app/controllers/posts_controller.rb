@@ -31,8 +31,10 @@ class PostsController < ApplicationController
 
  def update 
   if @post.update(post_params)
+    flash[:notice] = "Successfully updated post!"
     redirect_to user_posts_path
   else
+    flash[:notice] = "Error!"
     render :edit
   end
 
@@ -42,6 +44,8 @@ class PostsController < ApplicationController
    @post.destroy
    redirect_to user_posts_path
  end
+
+
 
  private 
  def set_post
