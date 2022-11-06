@@ -1,1 +1,16 @@
-<h1>All posts for user 1</h1>
+
+<br><br>
+<div class="container">
+ <h1 align="center">All posts for  <%=@user.name%></h1>
+ <br><br>
+    <div class="card card-body ">      
+    <% @posts.each do |post|%>
+    <h4 class="card-title">#<%=post.id%>.<%= post.title%></h4>
+    <p class="card-text"><%= post.text%> .</p>
+    <% end %>
+
+    </div>
+    <br>
+    <%= link_to "Back" , user_path(@user), class:"btn btn-primary" %>
+</div>
+<br><br>
