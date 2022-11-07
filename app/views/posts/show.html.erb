@@ -1,1 +1,15 @@
-<h1> post details for user 1</h1>
+<br><br><div class="container">
+    <div class="card card-body ">
+        <h4 class="card-title">#<%=@post.id%>.<%= @post.title%></h4>
+        <p class="card-text">    <%= @post.text%> .</p>
+        <div class="actions">
+          <%= link_to "Edit" , edit_user_post_path(@user), class:"btn btn-primary" %>
+          <%= link_to "show" , user_post_path(@user), class:"btn btn-success" %>
+          <%= link_to "Delete" , user_post_path(@user), method: :delete , class:"btn btn-danger" %>
+
+        </div>
+    </div>
+  <br><br>
+    <%= link_to "Back" , user_path(@user), class:"btn btn-primary" %>
+</div>
+<br><br>
