@@ -1,6 +1,6 @@
 <div class="container">
    <h1>New Post</h1>
-   <%= form_with url: new_user_post_path , model: @post do |form| %>
+   <%= form_with url: new_post_path , model: @post do |form| %>
 
    <%= form.label :title , class:"form-label"%>
    <%= form.text_field :title, class:"form-control" %>
