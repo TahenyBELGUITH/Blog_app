@@ -12,7 +12,7 @@ RSpec.describe 'Posts', type: :request do
       expect(response).to render_template(:index)
     end
     it 'body should includes correct placeholder text' do
-      expect(response.body).to include('All posts for user 1')
+      expect(response.body).to include('All posts for Taheny Belguith')
     end
   end
 
@@ -30,7 +30,7 @@ RSpec.describe 'Posts', type: :request do
     end
 
     it 'body should includes correct placeholder text' do
-      expect(response.body).to include('post details for user 1')
+      expect(response.body).to include('All posts for selected user')
     end
   end
 end
