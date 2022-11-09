@@ -1,16 +1,15 @@
-# frozen_string_literal: true
-
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.0.4'
-gem 'ffi'
-gem 'will_paginate', '~> 3.3', '>= 3.3.1'
 gem 'bootstrap-will_paginate', '~> 1.0'
+gem 'ffi'
+gem 'rails', '~> 7.0.4'
+gem 'will_paginate', '~> 3.3', '>= 3.3.1'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem 'devise'
 gem 'sprockets-rails'
 
 # Use postgresql as the database for Active Record
@@ -55,6 +54,7 @@ gem 'rails-controller-testing'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'database_cleaner'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec-rails', '~> 6.0.0'
 end
@@ -74,5 +74,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'webdrivers'
 end
+
+gem 'webdrivers'

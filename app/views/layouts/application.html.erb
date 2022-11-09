@@ -24,12 +24,15 @@
       <div class="navbar-nav">
         <%= link_to "Home", users_path, class:"nav-link active" %>
         <a class="nav-link" href="#">Log in </a>
-        <a class="nav-link" href="#">Sign out</a>
+        <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class:"nav-link" %>
+
       </div>
     </div>
   </div>
 </nav>
 
+    <p class="notice"><%=notice%></p>
+    <p class="alert"><%=alert%></p>
 
 
     <%= yield %>
