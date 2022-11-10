@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show]
-
   def index
-    @users = User.paginate(page: params[:page], per_page: 3)
+    @users = User.all
+    @user = current_user
   end
 
-  def show; end
+  def show
+    set_user
+  end
 
   private
 

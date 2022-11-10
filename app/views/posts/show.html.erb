@@ -1,26 +1,48 @@
-<div class="container">
-    <div class="card-post ">
-        <h4 class="card-title">#<%=@post.id%>.<%= @post.title%></h4>
-        <p class="card-text">    <%= @post.text%> .</p>
-      <p>Comments:<%= @post[:comments_counter] %> Likes: <%= @post[:likes_counter] %> </p>
-
-        <div class="actions d-flex">
-          <%= form_with url: post_likes_path(@post), scope: :like do |form| %>
-          <%= form.submit "Like", class:"btn btn-info" %>
-          <% end %>
-          <% if can? :update, @post%>
-          <%= link_to "Edit" , edit_post_path(@post), class:"btn btn-primary" %>
-          <% end %>
-          <% if can? :destroy, @post%>
-          <%= link_to "Delete" , user_post_path(@post), method: :delete , class:"btn btn-danger" %>
-          <% end %>
-        </div>
-        <div class="create-comments">
-          <%= render partial: "create_comments",  local: { post: @post } %>
-        </div>
+<div class="container">    
+    <h1 align="center"> show post for a given user</h1>
+<div class="posts">
+  <div>
+    <h4>#<%= @user.name%> </h4>
+    <h2> <%= @post.title %></h2>
+    <p> <%= @post.text%> </p>
+    <ul class="user-comments">
+  <% @post.comments.includes([:user, :post]).each do |comment| %>
+    <div class="comment-author d-flex">
+      <h1><% username = User.find(comment.user_id).name %></h1>
+       <li><%= username %>: <%= comment.text %></li>
     </div>
-  <br><br>
-    <%= link_to "Back" , user_path(@user), class:"btn btn-primary" %>
-</div>
-<br><br>
+    <% if can? :destroy, Comment %>
+     <div> <%= button_to 'delete comment', user_post_comment_path(comment.user, comment.post,comment), method: :delete ,class:"btn btn-danger"%></div>
+    <% end %>
 
+ <% end %> 
+ 
+  </ul>
+    <p > Comments: <%= @post.comments_counter %>, Likes: <%= @post.likes_counter %> </p>
+  </div>
+<div class="d-flex ">
+    <%= link_to 'Add comment', new_user_post_comment_path(@user, @post),class:"btn btn-primary me-2" %> <br>
+    <% if can? :destroy, @post %>
+       <%= button_to 'Delete Post',
+             user_post_path,
+              method: :delete,
+              data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  },
+                  class:"btn btn-danger me-2"%>
+     <% end %>
+
+      <%= form_with url: "/users/#{@post.user_id}/posts/#{@post.id}/likes" do |f| %>
+  <%= f.submit "Like",class:"btn btn-success" %>
+  <% end %>
+
+  </div>
+</div>
+
+<div>
+
+
+
+
+</div>

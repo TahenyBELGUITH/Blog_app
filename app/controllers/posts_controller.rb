@@ -1,15 +1,8 @@
 class PostsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_post, only: %i[destroy edit update]
-
   def index
     @user = User.find(params[:user_id])
-    @posts = Post.all.includes(:comments)
-  end
-
-  def show
-    @user = User.find(params[:user_id])
-    @post = @user.posts.includes(comments: [:user]).find(params[:id])
+    @posts = @user.posts.paginate(page: params[:page], per_page: 3)
   end
 
   def new
@@ -17,34 +10,32 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id
-    @post.comments_counter = 0
     @user = User.find(params[:user_id])
+    @post = current_user.posts.new(post_params)
+    @post.comments_counter = 0
+    @post.likes_counter = 0
+
     if @post.save
-      redirect_to user_posts_path
+      flash[:notice] = 'Post was successfully created'
+      redirect_to user_post_url(@user, @post)
     else
-      render :new
+      render 'new', status: :unprocessable_entity
     end
   end
 
-  def edit
-    @user = User.find(params[:id])
-  end
-
-  def update
-    if @post.update(post_params)
-      flash[:notice] = 'Successfully updated post!'
-      redirect_to posts_path
-    else
-      flash[:notice] = 'Error!'
-      render :edit
-    end
+  def show
+    @post = Post.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    @user = User.find(@post.user_id)
+    @user.posts_counter -= 1
     @post.destroy
-    redirect_to user_posts_path
+    @user.save
+    flash[:notice] = 'Post was successfully deleted'
+    redirect_to user_posts_path(@user)
   end
 
   private
@@ -53,7 +44,11 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def set_user
+    @user = User.find(params[:user_id])
+  end
+
   def post_params
-    params.require(:post).permit(:title, :text)
+    params.require(:post).permit(:title, :text, :likes_counter, :comments_counter)
   end
 end
