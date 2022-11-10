@@ -1,23 +1,44 @@
 class CommentsController < ApplicationController
-  def new
-    @comment = Comment.new
-    @post = Post.find(params[:post_id])
-  end
+  load_and_authorize_resource
+  before_action :set_user, only: [:create]
+  before_action :set_post, only: [:create]
 
   def create
-    @post = Post.find(params[:post_id])
-    new_comment = current_user.comments.new(post_id: @post.id,
-                                            user_id: current_user.id, text: comment_text)
-    if new_comment.save
-      redirect_to post_comments_path, notice: 'Success Comment Saved!'
+    @comment = Comment.new(comment_params)
+    @comment.post = @post
+    @comment.user = current_user
+    if @comment.save
+      redirect_to user_post_path(@user, @post)
     else
-      render :new, status: 'Error occured with Comment!'
+      render :new, status: :unprocessable_entity
     end
+  end
+
+  def new
+    @comment = Comment.new
+  end
+
+  def destroy
+    @comment = Comment.find(params[:id])
+    @post = Post.find(@comment.post_id)
+    @post.comments_counter -= 1
+    @comment.destroy
+    @post.save
+    flash[:notice] = 'Comment was successfully deleted'
+    redirect_to user_post_path(current_user, @post)
   end
 
   private
 
-  def comment_text
-    params.require(:comments).permit(:text)[:text]
+  def set_user
+    @user = User.find(params[:user_id])
+  end
+
+  def set_post
+    @post = Post.find(params[:post_id])
+  end
+
+  def comment_params
+    params.require(:comment).permit(:text)
   end
 end

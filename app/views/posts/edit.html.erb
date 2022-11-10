@@ -1,6 +1,6 @@
 <br><br><div class="container">
    <h2>Edited post</h2>
-   <%= form_with url: edit_user_post_path , model: @post do |form| %>
+   <%= form_with url: edit_post_path(@post) , model: @post do |form| %>
 
    <%= form.label :title , class:"form-label"%>
    <%= form.text_field :title, class:"form-control" %>

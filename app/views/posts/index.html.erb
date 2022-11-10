@@ -1,5 +1,5 @@
 
-<br><br>
+<br>
 <div class="container">
  <h1 align="center">All posts for  <%=@user.name%></h1>
  <br><br>
@@ -11,7 +11,7 @@
 
     </div>
     <br>
-    <%= link_to "Create new post" , new_post_path, class:"btn btn-success" %>
+    <%= link_to "Create new post" , new_user_post_path, class:"btn btn-success" %>
     <%= link_to "Back" , user_path(@user), class:"btn btn-primary" %>
 </div>
 <br><br>

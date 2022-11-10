@@ -1,4 +1,7 @@
- <%= form_with url: "users/#{@user.id}/posts/#{@post.id}/comments", scope: :comments do |form| %>
+<div class="container">
+
+ <%= form_with model: @comment, url: user_post_comments_path do |form|%>
   <%= form.text_area :text, placeholder: "Type something here...", class:"placeholding-area" %>
   <%= form.submit "Comment", class:"btn btn-success" %>
 <% end %>
+</div>
