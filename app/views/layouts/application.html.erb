@@ -22,18 +22,25 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
+      <% if user_signed_in? %>
         <%= link_to "Home", users_path, class:"nav-link active" %>
-        <a class="nav-link" href="#">Log in </a>
         <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class:"nav-link" %>
+        <% end %>
 
       </div>
     </div>
   </div>
 </nav>
 
-    <p class="notice"><%=notice%></p>
-    <p class="alert"><%=alert%></p>
+<br>
+    <div class="container">
+    <% if notice %>
+       <p class="notice alert alert-success"><%=notice%></p>
+    <% else %>
+       <p class="alert "><%=alert%></p>
+    <% end %>
 
+    </div>
 
     <%= yield %>
   </body>

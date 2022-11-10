@@ -9,8 +9,12 @@
           <%= form_with url: "/posts/#{@post.id}/likes", scope: :like do |form| %>
           <%= form.submit "Like", class:"btn btn-info" %>
           <% end %>
-          <%= link_to "Edit" , edit_post_path(@user), class:"btn btn-primary" %>
+          <% if can? :update, @post%>
+          <%= link_to "Edit" , edit_post_path(@post), class:"btn btn-primary" %>
+          <% end %>
+          <% if can? :destroy, @post%>
           <%= link_to "Delete" , user_post_path(@post), method: :delete , class:"btn btn-danger" %>
+          <% end %>
         </div>
         <div class="create-comments">
           <%= render partial: "create_comments",  local: { post: @post } %>

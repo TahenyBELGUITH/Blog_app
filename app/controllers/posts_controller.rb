@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_post, only: %i[destroy edit update]
 
   def index
@@ -17,6 +18,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.user_id = current_user.id
     @post.comments_counter = 0
     @user = User.find(params[:user_id])
     if @post.save
