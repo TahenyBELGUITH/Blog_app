@@ -1,12 +1,11 @@
-<br><br><div class="container">
-<h2 align="center">All posts for selected user</h2>
+<div class="container">
     <div class="card-post ">
         <h4 class="card-title">#<%=@post.id%>.<%= @post.title%></h4>
         <p class="card-text">    <%= @post.text%> .</p>
-        <p>Comments:<%= @post[:comments_counter] %> Likes: <%= @post[:likes_counter] %> </p>    
+      <p>Comments:<%= @post[:comments_counter] %> Likes: <%= @post[:likes_counter] %> </p>
 
         <div class="actions d-flex">
-          <%= form_with url: "/posts/#{@post.id}/likes", scope: :like do |form| %>
+          <%= form_with url: post_likes_path(@post), scope: :like do |form| %>
           <%= form.submit "Like", class:"btn btn-info" %>
           <% end %>
           <% if can? :update, @post%>

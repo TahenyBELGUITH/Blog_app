@@ -29,13 +29,13 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:user_id])
+    @user = User.find(params[:id])
   end
 
   def update
     if @post.update(post_params)
       flash[:notice] = 'Successfully updated post!'
-      redirect_to user_posts_path
+      redirect_to posts_path
     else
       flash[:notice] = 'Error!'
       render :edit
