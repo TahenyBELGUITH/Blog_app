@@ -28,6 +28,16 @@ class CommentsController < ApplicationController
     redirect_to user_post_path(current_user, @post)
   end
 
+  def post_create_api
+    @post = Post.find(params[:id])
+    @comment = current_user.comments.create!(comment_params)
+    if @comment.save
+      render json: @comment, only: %i[id user_id post_id text], status: :ok
+    else
+      render json: @comment.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_user

@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  load_and_authorize_resource
+  # load_and_authorize_resource
   def index
     @user = User.find(params[:user_id])
     @posts = @user.posts.paginate(page: params[:page], per_page: 3)
@@ -36,6 +36,13 @@ class PostsController < ApplicationController
     @user.save
     flash[:notice] = 'Post was successfully deleted'
     redirect_to user_posts_path(@user)
+  end
+
+  def post_comments_api
+    @comments = Post.find(params[:id]).comments
+    respond_to do |format|
+      format.json { render json: @comments }
+    end
   end
 
   private
