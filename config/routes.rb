@@ -1,31 +1,19 @@
-# frozen_string_literal: true
-
 Rails.application.routes.draw do
+  devise_for :users
+  # resources :likes
+  # resources :posts
+  # resources :comments
+  # resources :users
+  # # root 'users#index'
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  devise_for :users 
-  
-  devise_scope :user do  
-    get '/users/sign_out' => 'devise/sessions#destroy'     
-  end
-
-  namespace :api do
-    resources :users, only: [:show] do
-    resources :posts, only: [:index, :show] do
-    resources :comments, only: [:index, :new, :create, :show]
-    end
-    end
-    end 
-
+  # Defines the root path route ("/")
   resources :users, only: [:index, :show] do
-    resources :posts, only: [:index, :show, :new, :create, :destroy] do
-      resources :comments, only: [:new, :create, :destroy]
-      resources :likes, only: [:create]
-    end
+  resources :posts, only: [:index, :show, :new, :create]
   end
-    # devise_for :users, controllers: { confirmations: 'users/confirmations' }
-  # root to: 'users#index'
-  # get 'api/user/:id/posts' => 'users#api_user_post', format: 'json'
-  # get 'api/post/:id/comments' => 'posts#post_comments_api', format: 'json'  
-  # post 'api/post/:id/comments' => 'comments#post_create_api'
+  root 'users#index'
 
+  get "/users/:id/posts/:id/new" => "comments#new", as: 'new_user_post_comment'
+  post "/users/:id/posts/:id" => "comments#create", as: 'user_post_comments'
+  post "/users/:id/posts/:id/likes" => "likes#create", as: 'user_post_likes'
 end

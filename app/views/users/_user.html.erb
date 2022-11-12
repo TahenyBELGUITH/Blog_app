@@ -1,15 +1,22 @@
-<div class="container d-flex  users">
-<% obj.each do | user |%>
-<div class="card" style="width: 18rem;">
- <div class="image-container">
-  <img src=<%=  user.photo %> class="card-img-top profile-picture" alt="user picture">
-  </div>
-  <div class="card-body">
-     <h3 class="user-card-title"><%= user.name %></h3>
-     <p class="user-card-text">Number of posts: <%= user.posts_counter.nil? ? 0 : user.posts_counter %></p>
-   
-    <%= link_to 'details', user_path(user), class:"btn btn-primary"%>
-  </div>
-</div>
-<% end %>
+<div id="<%= dom_id user %>">
+  <p>
+    <strong>Name:</strong>
+    <%= user.name %>
+  </p>
+
+  <p>
+    <strong>Photo:</strong>
+    <%= user.photo %>
+  </p>
+
+  <p>
+    <strong>Bio:</strong>
+    <%= user.bio %>
+  </p>
+
+  <p>
+    <strong>Post counter:</strong>
+    <%= user.postscounter %>
+  </p>
+
 </div>

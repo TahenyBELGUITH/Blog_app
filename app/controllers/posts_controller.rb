@@ -1,54 +1,31 @@
 class PostsController < ApplicationController
-  # load_and_authorize_resource
   def index
+    @posts = Post.all
     @user = User.find(params[:user_id])
-    @posts = @user.posts.paginate(page: params[:page], per_page: 3)
-  end
-
-  def new
-    @post = Post.new
-  end
-
-  def create
-    @user = User.find(params[:user_id])
-    @post = current_user.posts.new(post_params)
-    @post.comments_counter = 0
-    @post.likes_counter = 0
-
-    if @post.save
-      flash[:notice] = 'Post was successfully created'
-      redirect_to user_post_url(@user, @post)
-    else
-      render 'new', status: :unprocessable_entity
-    end
   end
 
   def show
     @post = Post.find(params[:id])
-    @user = User.find(params[:user_id])
   end
 
-  def destroy
-    @post = Post.find(params[:id])
-    @user = User.find(@post.user_id)
-    @user.posts_counter -= 1
-    @post.destroy
-    @user.save
-    flash[:notice] = 'Post was successfully deleted'
-    redirect_to user_posts_path(@user)
+  def new
+    @id = current_user.id
+    @post = Post.new
+  end
+
+  def create
+    post = Post.new(title: post_params[:title], text: post_params[:text], author: current_user)
+    flash[:notice] = if post.save
+                       'Post created successfully'
+                     else
+                       'Error'
+                     end
+    redirect_to user_posts_path
   end
 
   private
 
-  def set_post
-    @post = Post.find(params[:id])
-  end
-
-  def set_user
-    @user = User.find(params[:user_id])
-  end
-
   def post_params
-    params.require(:post).permit(:title, :text, :likes_counter, :comments_counter)
+    params.require(:post).permit(:title, :text)
   end
 end

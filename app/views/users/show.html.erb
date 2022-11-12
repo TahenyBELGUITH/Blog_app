@@ -1,44 +1,33 @@
-<br><div class="container">
-<h1 align="center"> <%=@user.name%> details </h1>
-
-<div class="user-card d-flex" style="width: 18rem;">
-   <div>
-     <img src=<%=  @user.photo %> class="user-picture" alt="user picture">
-   </div>
-   <div class="user-card-body">
-     <h3 class="user-card-title"><%= @user.name %></h3>
-     <p class="user-card-text">Number of posts: <%= @user.posts_counter.nil? ? 0 : @user.posts_counter %></p>
-
-   </div>
-</div>
-
-<p class="bio"><%= @user.bio%></p>
-
-   <% @user.posts.each do |post| %>
-   <% if @user.posts_counter > 0 %>
-      <div class="d-flex posts">
-        <div>
-          <p>#<%=post.id%>.  <%= post.title%></p>
-          <p><%= post.text%></p>
-          <div class="d-flex"> 
-            <p>Comments: <%= post.comments_counter%></p>
-            <p>likes: <%= post.likes_counter%></p>
-          </div>
-        </div>
-        <div class="actions">
-          <%= link_to "show" , user_post_path(@user), class:"btn btn-success" %>
-         
-        </div>
-      </div>
-   <% else %>
-    <p> O posts</p>
-   <% end %>
-   <% end %>
-
-<%= link_to "Back", root_path , class:"btn btn-success" %>
-<%= link_to "See all posts", user_posts_path(@user), class:"btn btn-primary" %>
-<br><br>
-
-
-
+<div class="page_container">
+  <div class="author_container">
+    <div class="image_placeholder">
+      <img src=<%= @user.photo%> alt="" >
+    </div>
+    <div class="details">
+      <h1><%= @user.name %></h1>
+      <p>Number of posts: <%= @user.postscounter %></p>
+    </div>
+  </div>
+  <div class="bio">
+    <%= @user.bio %>
+  </div>
+  <% @user.most_recent_posts.each do |a| %>
+  <div class="posts">
+    <h4>
+      <a href='/user/<%=a.id %>/posts/<%=a.id%>'>
+        
+      </a>
+    </h4>
+    <p><%= a.text %></p>
+    <div class="stats">
+      <p>Comments: <%= a.commentscounter %>,</p>
+      <p>Likes: <%= a.likescounter %></p>
+    </div>
+  </div>
+  <% end %>
+  <button class="button">
+    <a class="link" href='/users/<%= @user.id %>/posts'>
+    See all Posts
+    </a>
+  </button>
 </div>

@@ -1,3 +1,11 @@
-<div class="container m-5">
-<%= render "form" %>
-</div>
+<%= form_with model: @post, url: user_posts_url do |form| %>
+  <div>
+  <%= form.label :title %>
+  <%= form.text_field :title %>
+  </div>
+  <div>
+  <%= form.label :text %>
+  <%= form.text_area :text %>
+  </div>
+  <%= form.submit "Add Post" %>
+<% end %>
