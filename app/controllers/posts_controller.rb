@@ -38,13 +38,6 @@ class PostsController < ApplicationController
     redirect_to user_posts_path(@user)
   end
 
-  def post_comments_api
-    @comments = Post.find(params[:id]).comments
-    respond_to do |format|
-      format.json { render json: @comments }
-    end
-  end
-
   private
 
   def set_post

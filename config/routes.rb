@@ -8,6 +8,14 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'     
   end
 
+  namespace :api do
+    resources :users, only: [:show] do
+    resources :posts, only: [:index, :show] do
+    resources :comments, only: [:index, :new, :create, :show]
+    end
+    end
+    end 
+
   resources :users, only: [:index, :show] do
     resources :posts, only: [:index, :show, :new, :create, :destroy] do
       resources :comments, only: [:new, :create, :destroy]
@@ -15,9 +23,9 @@ Rails.application.routes.draw do
     end
   end
     # devise_for :users, controllers: { confirmations: 'users/confirmations' }
-  root to: 'users#index'
-  get 'api/user/:id/posts' => 'users#api_user_post', format: 'json'
-  get 'api/post/:id/comments' => 'posts#post_comments_api', format: 'json'  
-  post 'api/post/:id/comments' => 'comments#post_create_api'
+  # root to: 'users#index'
+  # get 'api/user/:id/posts' => 'users#api_user_post', format: 'json'
+  # get 'api/post/:id/comments' => 'posts#post_comments_api', format: 'json'  
+  # post 'api/post/:id/comments' => 'comments#post_create_api'
 
 end
