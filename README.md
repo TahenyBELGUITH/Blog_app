@@ -1,75 +1,59 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Blog_app
+# Blog-App
 
-## project Description.
-
-
-- this project will be a classic example of a blog website. where user will create a fully functional website that will show the list of posts and empower readers to interact with them by adding comments and liking posts.
+> The Blog app is a classic example of a blog website, a fully functional website that will show the list of posts and empowers readers to interact with them by adding comments and liking posts.
 
 
 ## Built With
 
-- ROR
-- GitHub
+- Ruby
+- RoR
+- PostgreSQL, Rubocop
 
 ## Live Demo (if available)
 
-[Live Demo Link](https://livedemo.com)
+[Coming Soon]()
 
 
-## Getting Started
-
-- To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-- Ruby
-- Nodejs
-- Postgresql
-- Github
-
-### Setup
-
-- With git, clone the code to your machine, or download a ZIP of all the files directly.
-- Download the ZIP file from this location or run the following git command to clone the files to your machine:
-
-> - git clone https://github.com/TahenyBELGUITH/FacebookApp.git
-
+### Getting started
+- In order to get a copy of this project you need to download it from https://github.com/NabilHY/blog-app.git
+- Extract the zipped file and open it in your code editor
 ### Install
-
-- After opening the files in Visual Studio Code, open the VS Code integrated terminal and run the following commands:
-
-> bundle init
-> bundle install
-
-
-### Usage
-
-- Run the command in your terminal below to run the ruby program
-
->  ruby main.rd to run
-
+- Run the command bellow in your terminal to get all required files
+```
+bundle install
+```
 ### Run tests
+you can run one of the following command in your terminal
+1. Run testing
+```Ruby
+rspec spec
+```
+2. Run linters
+```Ruby
+> Rubocop --color
+> Rubocop -A
+```
 
-- Run the command in your terminal below for linter checks
+### Run live server
+`$cd bin`
+`$rails server`
 
-> rubocop
+## Authors
 
-## Author
+👤 **NabilHY**
 
-👤 **Taheny BELGUITH**
-
-- Twitter: [@TahenyBELGUITH](https://github.com/TahenyBELGUITH)
-- Twitter: [@BelguithTaheny](https://twitter.com/BelguithTaheny)
-- LinkedIn: [@belguith taheny](https://www.linkedin.com/in/belguith-taheny/)
+- GitHub: [@NabilHY](https://github.com/NabilHY)
+- Twitter: [@NeoNabil12](https://twitter.com/NeoNabil2)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/nabil-hayoun/)
 
 
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/TahenyBELGUITH/FacebookApp.git/issues).
+Feel free to check the [issues page](../../issues/).
 
 ## Show your support
 
@@ -83,6 +67,4 @@ Give a ⭐️ if you like this project!
 
 ## 📝 License
 
-This project is [MIT](./LICENSE) licensed.
-
-_NOTE: we recommend using the [MIT license](https://choosealicense.com/licenses/mit/) - you can set it up quickly by [using templates available on GitHub](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository). You can also use [any other license](https://choosealicense.com/licenses/) if you wish._
+This project is [MIT](./MIT.md) licensed.

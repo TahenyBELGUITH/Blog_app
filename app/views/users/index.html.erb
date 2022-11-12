@@ -1,9 +1,1 @@
-<div class="container">
-<br>
-
- <h1 align="center">All users</h1>
-
- <%= render 'user', obj:@users %>
-
-
-</div>
+<%= render partial:"users", locals: {users: @users} %>

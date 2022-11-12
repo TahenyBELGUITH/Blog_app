@@ -1,14 +1,11 @@
 class LikesController < ApplicationController
   def create
-    @like = Like.new
     @post = Post.find(params[:post_id])
-    @user = User.find(params[:user_id])
-    @like.post = @post
-    @like.user = current_user
+    @like = current_user.likes.new(author_id: current_user.id, post_id: @post.id)
     if @like.save
-      redirect_to user_post_path(@user, @post)
+      redirect_to user_post_path(@post.author_id, @post.id), notice: 'Comment was successfully created.'
     else
-      render :new, status: :unprocessable_entity
+      render :new, alert: 'like not saved'
     end
   end
 end

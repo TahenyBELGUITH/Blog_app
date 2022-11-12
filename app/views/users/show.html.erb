@@ -1,44 +1,11 @@
-<br><div class="container">
-<h1 align="center"> <%=@user.name%> details </h1>
-
-<div class="user-card d-flex" style="width: 18rem;">
-   <div>
-     <img src=<%=  @user.photo %> class="user-picture" alt="user picture">
-   </div>
-   <div class="user-card-body">
-     <h3 class="user-card-title"><%= @user.name %></h3>
-     <p class="user-card-text">Number of posts: <%= @user.posts_counter.nil? ? 0 : @user.posts_counter %></p>
-
-   </div>
+<%= render partial:"user", locals: {user: @user} %>
+<%= render partial:"bio", locals: {user: @user} %>
+<%= render partial:"posts/posts", locals: {posts: @posts} %>
+<%= link_to user_posts_path(@user.id), :action => 'go' do %>
+<div class="d-flex justify-content-center">
+    <button type="button" class = "btn btn-dark mb-2 mt-2">
+        See all posts
+    </button>
 </div>
+<% end %>
 
-<p class="bio"><%= @user.bio%></p>
-
-   <% @user.posts.each do |post| %>
-   <% if @user.posts_counter > 0 %>
-      <div class="d-flex posts">
-        <div>
-          <p>#<%=post.id%>.  <%= post.title%></p>
-          <p><%= post.text%></p>
-          <div class="d-flex"> 
-            <p>Comments: <%= post.comments_counter%></p>
-            <p>likes: <%= post.likes_counter%></p>
-          </div>
-        </div>
-        <div class="actions">
-          <%= link_to "show" , user_post_path(@user), class:"btn btn-success" %>
-         
-        </div>
-      </div>
-   <% else %>
-    <p> O posts</p>
-   <% end %>
-   <% end %>
-
-<%= link_to "Back", root_path , class:"btn btn-success" %>
-<%= link_to "See all posts", user_posts_path(@user), class:"btn btn-primary" %>
-<br><br>
-
-
-
-</div>

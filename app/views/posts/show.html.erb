@@ -1,48 +1,22 @@
-<div class="container">    
-    <h1 align="center"> show post for a given user</h1>
-<div class="posts">
-  <div>
-    <h4>#<%= @user.name%> </h4>
-    <h2> <%= @post.title %></h2>
-    <p> <%= @post.text%> </p>
-    <ul class="user-comments">
-  <% @post.comments.includes([:user, :post]).each do |comment| %>
-    <div class="comment-author d-flex">
-      <h1><% username = User.find(comment.user_id).name %></h1>
-       <li><%= username %>: <%= comment.text %></li>
-    </div>
-    <% if can? :destroy, Comment %>
-     <div> <%= button_to 'delete comment', user_post_comment_path(comment.user, comment.post,comment), method: :delete ,class:"btn btn-danger"%></div>
-    <% end %>
-
- <% end %> 
- 
-  </ul>
-    <p > Comments: <%= @post.comments_counter %>, Likes: <%= @post.likes_counter %> </p>
-  </div>
-<div class="d-flex ">
-    <%= link_to 'Add comment', new_user_post_comment_path(@user, @post),class:"btn btn-primary me-2" %> <br>
-    <% if can? :destroy, @post %>
-       <%= button_to 'Delete Post',
-             user_post_path,
-              method: :delete,
-              data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  },
-                  class:"btn btn-danger me-2"%>
-     <% end %>
-
-      <%= form_with url: "/users/#{@post.user_id}/posts/#{@post.id}/likes" do |f| %>
-  <%= f.submit "Like",class:"btn btn-success" %>
+<div class="container">
+  <%= render partial:"users/user", locals: {user: @user} %>
+  <%= render partial:"posts/post", locals: {post: @post} %>
+  <%= form_with url: "/posts/#{@post.id}/likes", scope: :like do |form| %>
+    <%= form.submit "Like", class:"btn btn-secondary" %>
   <% end %>
-
+  <div class="card">
+    <div class="card-header">
+      <h4>
+        <% @comments.each do |comment| %>
+          <h2><%= comment.author.name %>: <%= comment.text %></h2>
+        <% end %>
+      </h4>
+    </div>
+    <div class="card-body">
+     <p class="card-text"><%= render "comment_creation", comment: @post %></p>
+    </div>
+    <div>
+     <%= link_to "Back to Posts", user_posts_path, class:"btn btn-dark" %>
+    </div>
   </div>
-</div>
-
-<div>
-
-
-
-
 </div>
