@@ -1,35 +1,16 @@
-<div class="page_container">
-  <div class="author_container">
-    <div class="image_placeholder">
-    <img src=<%= @user.photo%> alt="" >
-    </div>
-    <div class="details">
-      <h1><%= @user.name %></h1>
-      <p>Number of posts: <%= @user.postscounter %></p>
-    </div>
-  </div>
-  <% @user.most_recent_posts.each do |a| %>
-    <p> show all  posts here </p>
-  <div class="posts">
-    <h4>
-      <a href='/users/<%=a.id %>/posts/<%=a.id%>'>
-          post id
-      </a>
-    </h4>
-    <p> <%= a.title %> </p>
-
-    <p> <%= a.text %> </p>
-    <div class="stats">
-      <p>Comments: <%= a.commentscounter %>,</p>
-      <p>Likes: <%= a.likescounter %></p>
-    </div>
-    <% a.five_most_recent_posts.each do |comment| %>
-      <li><%= comment.author.name %> : <%= comment.text%></li>
-    <% end %>
-  </div>
+<div class="container mt-4">
+  <%= render partial:"users/user", locals: {user: @user} %>
+  <% @posts.each do |post| %>
+    <%= render partial:"post", locals: {post: post} %>
   <% end %>
-  <%= link_to new_user_post_path do %>
-    <button>Add Post</button>
-  <% end %>
-
+</div>
+<div class="d-flex justify-content-center">
+  <button type="button" class = "btn btn-dark mb-2 mt-2">
+      <%= link_to 'New Post', new_user_post_path %>
+  </button>
+</div>
+<div class="d-flex justify-content-center">
+        <button type="button" class = "btn btn-dark mb-2 mt-2">
+            Pagination
+        </button>
 </div>

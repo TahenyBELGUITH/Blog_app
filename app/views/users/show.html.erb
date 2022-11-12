@@ -1,33 +1,11 @@
-<div class="page_container">
-  <div class="author_container">
-    <div class="image_placeholder">
-      <img src=<%= @user.photo%> alt="" >
-    </div>
-    <div class="details">
-      <h1><%= @user.name %></h1>
-      <p>Number of posts: <%= @user.postscounter %></p>
-    </div>
-  </div>
-  <div class="bio">
-    <%= @user.bio %>
-  </div>
-  <% @user.most_recent_posts.each do |a| %>
-  <div class="posts">
-    <h4>
-      <a href='/user/<%=a.id %>/posts/<%=a.id%>'>
-        
-      </a>
-    </h4>
-    <p><%= a.text %></p>
-    <div class="stats">
-      <p>Comments: <%= a.commentscounter %>,</p>
-      <p>Likes: <%= a.likescounter %></p>
-    </div>
-  </div>
-  <% end %>
-  <button class="button">
-    <a class="link" href='/users/<%= @user.id %>/posts'>
-    See all Posts
-    </a>
-  </button>
+<%= render partial:"user", locals: {user: @user} %>
+<%= render partial:"bio", locals: {user: @user} %>
+<%= render partial:"posts/posts", locals: {posts: @posts} %>
+<%= link_to user_posts_path(@user.id), :action => 'go' do %>
+<div class="d-flex justify-content-center">
+    <button type="button" class = "btn btn-dark mb-2 mt-2">
+        See all posts
+    </button>
 </div>
+<% end %>
+

@@ -1,62 +1,63 @@
-# BLOG APP
+![](https://img.shields.io/badge/Microverse-blueviolet)
+
+# Blog-App
+
+> The Blog app is a classic example of a blog website, a fully functional website that will show the list of posts and empowers readers to interact with them by adding comments and liking posts.
 
 
-> This is a blog app tha helps people create edit and delete blogs on this platform
+## Built With
+
+- Ruby
+- RoR
+- PostgreSQL, Rubocop
+
+## Live Demo (if available)
+
+[Coming Soon]()
 
 
-## technologies
-
--ruby
-
-To get a local copy up and running follow these simple example steps.
-
-## Getting Started with these project
- ### pre requests
- - [ ] Ruby on Rails
- - [ ] postgres
-
-### Setup
-
-##  clone this repo at :
-
-```
-https://github.com/businesskaniki/blog.git
-
-```
-```
-cd blog
-
-```
-
-### Install depedencies
-
+### Getting started
+- In order to get a copy of this project you need to download it from https://github.com/NabilHY/blog-app.git
+- Extract the zipped file and open it in your code editor
+### Install
+- Run the command bellow in your terminal to get all required files
 ```
 bundle install
-
+```
+### Run tests
+you can run one of the following command in your terminal
+1. Run testing
+```Ruby
+rspec spec
+```
+2. Run linters
+```Ruby
+> Rubocop --color
+> Rubocop -A
 ```
 
-### Usage
+### Run live server
+`$cd bin`
+`$rails server`
 
-```
-rails s
-
-```
 ## Authors
 
-👤 **Nicholas Maina**
+👤 **NabilHY**
 
-- GitHub: [@githubhandle](https://github.com/businesskaniki)
-- Twitter: [@twitterhandle](https://twitter.com/Nik7346)
+- GitHub: [@NabilHY](https://github.com/NabilHY)
+- Twitter: [@NeoNabil12](https://twitter.com/NeoNabil2)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/nabil-hayoun/)
+
 
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/businesskaniki/blog/issues).
+Feel free to check the [issues page](../../issues/).
 
 ## Show your support
 
-Give us stars and share it with your friends ⭐️ if you like this project!
+Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
@@ -66,4 +67,4 @@ Give us stars and share it with your friends ⭐️ if you like this project!
 
 ## 📝 License
 
-This project is [MIT](./LICENSE) licensed.
+This project is [MIT](./MIT.md) licensed.

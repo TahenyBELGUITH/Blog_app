@@ -1,17 +1,1 @@
-<div class="page_container">
-<h1>Here is a list of all users</h1>
-  <% @users.each do |a| %>
-    <div class="author_container">
-    <div class="image_placeholder">
-      <img src=<%= a.photo%> alt="" >
-    </div>
-    <div class="details">
-      <h1>
-      <a href='/users/<%= a.id %>'>
-      <%= a.name %>
-      </a>
-      </h1>
-      <p>Number of posts: <%= a.postscounter %></p>
-    </div>
-  </div>
-<% end %>
+<%= render partial:"users", locals: {users: @users} %>

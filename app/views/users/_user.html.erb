@@ -1,22 +1,11 @@
-<div id="<%= dom_id user %>">
-  <p>
-    <strong>Name:</strong>
-    <%= user.name %>
-  </p>
-
-  <p>
-    <strong>Photo:</strong>
-    <%= user.photo %>
-  </p>
-
-  <p>
-    <strong>Bio:</strong>
-    <%= user.bio %>
-  </p>
-
-  <p>
-    <strong>Post counter:</strong>
-    <%= user.postscounter %>
-  </p>
-
+<div class="row align-items-center mt-2 ml-2">
+    <img class="img-thumbnail col-1" src="<%= user.photo %>">
+    <div class="container border border-black col-10">
+        <div class="row">
+            <%= link_to user_path(user.id), :action => 'go' do %>
+                <p class="display-4 col"><%= user.name %></p>
+            <% end %>
+            <p class="col mt-2 text-right">Number of Posts: <%= user.post_counter %></p>
+        </div>
+    </div>
 </div>
